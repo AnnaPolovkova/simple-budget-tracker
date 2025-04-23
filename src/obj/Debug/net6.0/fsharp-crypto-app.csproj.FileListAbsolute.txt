@@ -1,0 +1,2 @@
+C:\Users\79043\MarketCapFSHARP-main\src\bin\Debug\net6.0\fsharp-crypto-app.deps.json
+C:\Users\79043\MarketCapFSHARP-main\src\obj\Debug\net6.0\fsharp-crypto-app.GeneratedMSBuildEditorConfig.editorconfig

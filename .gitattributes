@@ -1,0 +1,12 @@
+*.fs linguist-language=F#
+*.fsx linguist-language=F#
+*.fsi linguist-language=F#
+*.fsproj linguist-language=F#
+*.py linguist-generated
+*.php linguist-generated
+*.rs linguist-generated
+*.dart linguist-generated
+*.sh linguist-generated
+*.html linguist-generated
+fable_modules/** linguist-vendored
+node_modules/** linguist-vendored
