@@ -2,11 +2,12 @@ module Model
 
 open System
 
- type TransactionType = Income | Expense
+type TransactionType = Income | Expense
 
 type Transaction = {
     Id: Guid
     Type: TransactionType
+    Description: string
     Category: string
     Amount: decimal
     Date: DateTime
@@ -14,16 +15,14 @@ type Transaction = {
 
 type Model = {
     Transactions: Transaction list
-    InputType: TransactionType
-    InputCategory: string
+    InputDescription: string
     InputAmount: string
-    Filter: TransactionType option
+    InputCategory: string
 }
 
 let initModel = {
     Transactions = []
-    InputType = Income
-    InputCategory = ""
+    InputDescription = ""
     InputAmount = ""
-    Filter = None
+    InputCategory = ""
 }

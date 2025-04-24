@@ -1,7 +1,8 @@
-import { FSharpRef, Union, Record } from "./fable_modules/fable-library.4.0.0/Types.js";
-import { union_type, list_type, record_type, decimal_type, string_type, class_type } from "./fable_modules/fable-library.4.0.0/Reflection.js";
+import { FSharpRef, Union } from "./fable_modules/fable-library.4.0.0/Types.js";
+import { list_type, union_type, class_type, string_type } from "./fable_modules/fable-library.4.0.0/Reflection.js";
 import { uncurry, defaultOf } from "./fable_modules/fable-library.4.0.0/Util.js";
 import { fromString, Auto_generateBoxedDecoder_Z6670B51 } from "./fable_modules/Thoth.Json.10.4.1/./Decode.fs.js";
+import { Transaction, TransactionType, Model, Transaction$reflection } from "./Model.fs.js";
 import { saveTransactions, extraCoders } from "./Api.fs.js";
 import { toConsole } from "./fable_modules/fable-library.4.0.0/String.js";
 import { filter, cons, singleton, empty } from "./fable_modules/fable-library.4.0.0/List.js";
@@ -10,35 +11,6 @@ import { tryParse } from "./fable_modules/fable-library.4.0.0/Decimal.js";
 import Decimal from "./fable_modules/fable-library.4.0.0/Decimal.js";
 import { newGuid } from "./fable_modules/fable-library.4.0.0/Guid.js";
 import { now } from "./fable_modules/fable-library.4.0.0/Date.js";
-
-export class Transaction extends Record {
-    "constructor"(Id, Description, Amount, Category, Date$) {
-        super();
-        this.Id = Id;
-        this.Description = Description;
-        this.Amount = Amount;
-        this.Category = Category;
-        this.Date = Date$;
-    }
-}
-
-export function Transaction$reflection() {
-    return record_type("Update.Transaction", [], Transaction, () => [["Id", class_type("System.Guid")], ["Description", string_type], ["Amount", decimal_type], ["Category", string_type], ["Date", class_type("System.DateTime")]]);
-}
-
-export class Model extends Record {
-    "constructor"(Transactions, InputDescription, InputAmount, InputCategory) {
-        super();
-        this.Transactions = Transactions;
-        this.InputDescription = InputDescription;
-        this.InputAmount = InputAmount;
-        this.InputCategory = InputCategory;
-    }
-}
-
-export function Model$reflection() {
-    return record_type("Update.Model", [], Model, () => [["Transactions", list_type(Transaction$reflection())], ["InputDescription", string_type], ["InputAmount", string_type], ["InputCategory", string_type]]);
-}
 
 export class Msg extends Union {
     "constructor"(tag, fields) {
@@ -92,12 +64,12 @@ export function init() {
 export function update(msg, model) {
     switch (msg.tag) {
         case 2: {
-            const amt = msg.fields[0];
-            return [new Model(model.Transactions, model.InputDescription, amt, model.InputCategory), Cmd_none()];
+            const amount = msg.fields[0];
+            return [new Model(model.Transactions, model.InputDescription, amount, model.InputCategory), Cmd_none()];
         }
         case 3: {
-            const cat = msg.fields[0];
-            return [new Model(model.Transactions, model.InputDescription, model.InputAmount, cat), Cmd_none()];
+            const category = msg.fields[0];
+            return [new Model(model.Transactions, model.InputDescription, model.InputAmount, category), Cmd_none()];
         }
         case 0: {
             let matchValue;
@@ -106,8 +78,8 @@ export function update(msg, model) {
                 outArg = v;
             })), outArg];
             if (matchValue[0]) {
-                const amt_1 = matchValue[1];
-                const newTransaction = new Transaction(newGuid(), model.InputDescription, amt_1, model.InputCategory, now());
+                const amount_1 = matchValue[1];
+                const newTransaction = new Transaction(newGuid(), new TransactionType(0, []), model.InputDescription, model.InputCategory, amount_1, now());
                 const updated = cons(newTransaction, model.Transactions);
                 saveTransactions(updated);
                 return [new Model(updated, "", "", ""), Cmd_none()];

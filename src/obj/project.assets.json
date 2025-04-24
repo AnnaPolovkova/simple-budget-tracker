@@ -298,6 +298,23 @@
           }
         }
       },
+      "Feliz.Recharts/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "FSharp.Core": "4.7.2",
+          "Feliz": "2.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Feliz.Recharts.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Feliz.Recharts.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "FSharp.Core/5.0.2": {
         "type": "package",
         "compile": {
@@ -685,6 +702,58 @@
         "lib/netstandard2.0/Feliz.CompilerPlugins.xml"
       ]
     },
+    "Feliz.Recharts/4.3.0": {
+      "sha512": "qXgOMKMLrTd58SF9OV633L3fm0BgCvPMY97MP1bWD1v0sV7zZkxobsOyQIGTI+KRgTF2RHh1adtnByDJb0coUQ==",
+      "type": "package",
+      "path": "feliz.recharts/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fable/Area.fs",
+        "fable/AreaChart.fs",
+        "fable/Bar.fs",
+        "fable/BarChart.fs",
+        "fable/Brush.fs",
+        "fable/CartesianGrid.fs",
+        "fable/Cell.fs",
+        "fable/ComposedChart.fs",
+        "fable/ErrorBar.fs",
+        "fable/Feliz.Recharts.fsproj",
+        "fable/Funnel.fs",
+        "fable/Interop.fs",
+        "fable/Label.fs",
+        "fable/LabelList.fs",
+        "fable/Legend.fs",
+        "fable/Line.fs",
+        "fable/LineChart.fs",
+        "fable/Pie.fs",
+        "fable/PieChart.fs",
+        "fable/PolarAngleAxis.fs",
+        "fable/PolarGrid.fs",
+        "fable/PolarRadiusAxis.fs",
+        "fable/Radar.fs",
+        "fable/RadarChart.fs",
+        "fable/RadialBar.fs",
+        "fable/RadialBarChart.fs",
+        "fable/Recharts.fs",
+        "fable/ReferenceArea.fs",
+        "fable/ReferenceDot.fs",
+        "fable/ReferenceLine.fs",
+        "fable/ResponsiveContainer.fs",
+        "fable/ScatterChart.fs",
+        "fable/Text.fs",
+        "fable/Tooltip.fs",
+        "fable/Types.fs",
+        "fable/XAxis.fs",
+        "fable/YAxis.fs",
+        "fable_logo.png",
+        "feliz.recharts.4.3.0.nupkg.sha512",
+        "feliz.recharts.nuspec",
+        "lib/netstandard2.0/Feliz.Recharts.dll",
+        "lib/netstandard2.0/Feliz.Recharts.xml"
+      ]
+    },
     "FSharp.Core/5.0.2": {
       "sha512": "DpcajqENgb3VXaHw1FKfVS+TWwEzck1PCajqLwBAVrtd1lfxd7T8JISVZBdV1mX9+2g48+tIgpNaVJWObdMrBw==",
       "type": "package",
@@ -742,6 +811,7 @@
       "Fable.SimpleHttp >= 3.0.0",
       "Feliz >= 2.4.0",
       "Feliz.Bulma >= 2.0.0",
+      "Feliz.Recharts >= 4.3.0",
       "Thoth.Json >= 10.4.1"
     ]
   },
@@ -752,11 +822,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\79043\\MarketCapFSHARP-main\\src\\fsharp-crypto-app.csproj",
+      "projectUniqueName": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\fsharp-crypto-app.csproj",
       "projectName": "fsharp-crypto-app",
-      "projectPath": "C:\\Users\\79043\\MarketCapFSHARP-main\\src\\fsharp-crypto-app.csproj",
+      "projectPath": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\fsharp-crypto-app.csproj",
       "packagesPath": "C:\\Users\\79043\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\79043\\MarketCapFSHARP-main\\src\\obj\\",
+      "outputPath": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -819,6 +889,10 @@
           "Feliz.Bulma": {
             "target": "Package",
             "version": "[2.0.0, )"
+          },
+          "Feliz.Recharts": {
+            "target": "Package",
+            "version": "[4.3.0, )"
           },
           "Thoth.Json": {
             "target": "Package",

@@ -1,23 +1,9 @@
 module Update
 
-open System
-open Api
 open Elmish
-
-type Transaction = {
-    Id: Guid
-    Description: string
-    Amount: decimal
-    Category: string
-    Date: DateTime
-}
-
-type Model = {
-    Transactions: Transaction list
-    InputDescription: string
-    InputAmount: string
-    InputCategory: string
-}
+open Api
+open System
+open Model
 
 type Msg =
     | AddTransaction
@@ -39,21 +25,22 @@ let init () =
         InputCategory = ""
     }, Cmd.ofMsg LoadFromStorage
 
-let update msg model =
+let update msg (model: Model) =
     match msg with
     | UpdateDescription desc ->
         { model with InputDescription = desc }, Cmd.none
-    | UpdateAmount amt ->
-        { model with InputAmount = amt }, Cmd.none
-    | UpdateCategory cat ->
-        { model with InputCategory = cat }, Cmd.none
+    | UpdateAmount amount ->
+        { model with InputAmount = amount }, Cmd.none
+    | UpdateCategory category ->
+        { model with InputCategory = category }, Cmd.none
     | AddTransaction ->
-        match Decimal.TryParse model.InputAmount with
-        | true, amt ->
+        match System.Decimal.TryParse model.InputAmount with
+        | true, amount ->
             let newTransaction = {
                 Id = Guid.NewGuid()
+                Type = Income // Можно добавить выбор типа
                 Description = model.InputDescription
-                Amount = amt
+                Amount = amount
                 Category = model.InputCategory
                 Date = DateTime.Now
             }
@@ -68,7 +55,7 @@ let update msg model =
             }, Cmd.none
         | _ -> model, Cmd.none
     | RemoveTransaction id ->
-        let updated = List.filter (fun t -> t.Id <> id) model.Transactions
+        let updated = model.Transactions |> List.filter (fun t -> t.Id <> id)
         saveTransactions updated
         { model with Transactions = updated }, Cmd.none
     | LoadFromStorage ->

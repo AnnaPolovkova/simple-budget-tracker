@@ -21,5 +21,6 @@
     <PkgFable_SimpleHttp Condition=" '$(PkgFable_SimpleHttp)' == '' ">C:\Users\79043\.nuget\packages\fable.simplehttp\3.0.0</PkgFable_SimpleHttp>
     <PkgFable_Elmish Condition=" '$(PkgFable_Elmish)' == '' ">C:\Users\79043\.nuget\packages\fable.elmish\4.0.0</PkgFable_Elmish>
     <PkgFable_Elmish_React Condition=" '$(PkgFable_Elmish_React)' == '' ">C:\Users\79043\.nuget\packages\fable.elmish.react\4.0.0</PkgFable_Elmish_React>
+    <PkgElmish Condition=" '$(PkgElmish)' == '' ">C:\Users\79043\.nuget\packages\elmish\4.3.0</PkgElmish>
   </PropertyGroup>
 </Project>

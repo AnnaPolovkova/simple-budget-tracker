@@ -14,6 +14,7 @@
           "Fable.SimpleHttp": "3.0.0",
           "Feliz": "2.4.0",
           "Feliz.Bulma": "2.0.0",
+          "Feliz.Recharts": "4.3.0",
           "Thoth.Json": "10.4.1"
         },
         "runtime": {
@@ -224,6 +225,18 @@
           }
         }
       },
+      "Feliz.Recharts/4.3.0": {
+        "dependencies": {
+          "FSharp.Core": "5.0.2",
+          "Feliz": "2.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Feliz.Recharts.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        }
+      },
       "FSharp.Core/5.0.2": {
         "runtime": {
           "lib/netstandard2.0/FSharp.Core.dll": {
@@ -411,6 +424,13 @@
       "sha512": "sha512-ZOOxmOVv3cmuF5bZE5hGEJUX5YwWH2KoyliY+8UsQ9ER5BptD31zOxGF2q4fP3SFndqP/wJsfA7y4pkew45H9Q==",
       "path": "feliz.compilerplugins/2.0.0",
       "hashPath": "feliz.compilerplugins.2.0.0.nupkg.sha512"
+    },
+    "Feliz.Recharts/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qXgOMKMLrTd58SF9OV633L3fm0BgCvPMY97MP1bWD1v0sV7zZkxobsOyQIGTI+KRgTF2RHh1adtnByDJb0coUQ==",
+      "path": "feliz.recharts/4.3.0",
+      "hashPath": "feliz.recharts.4.3.0.nupkg.sha512"
     },
     "FSharp.Core/5.0.2": {
       "type": "package",
