@@ -15,234 +15,139 @@
     
     <!-- Global Styles -->
     <style>
-        :root {
-            --primary-color: #6633DD;
-            --secondary-color: #C8C1F4;
-            --gradient-bg: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            min-height: 100vh;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Smooth transitions */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--secondary-color);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-color);
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        .pulse-hover:hover {
-            animation: pulse 1.5s infinite;
-        }
-        
-        /* Tooltip improvements */
-        .tooltip-container {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .tooltip-box {
-            opacity: 0;
-            transform: translateY(-5px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            left: 105%;
-            z-index: 100;
-            background-color: white;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            width: 220px;
-            font-size: 0.9rem;
-            border: none;
-        }
-        
-        .tooltip-container:hover .tooltip-box {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .tooltip-box ul {
-            list-style-type: disc;
-            padding-left: 20px;
-            margin: 8px 0;
-        }
-        
-        .tooltip-box a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .tooltip-box a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Custom Bulma overrides */
-        .button.is-primary {
-            background-color: var(--primary-color);
-        }
-        
-        .button.is-primary:hover {
-            background-color: #5a2dc7;
-        }
-        
-        .hero.is-primary {
-            background: var(--gradient-bg);
-        }
-        
-        .navbar.is-primary {
-            background-color: var(--primary-color);
-        }
-        
-        .tag:not(body).is-primary {
-            background-color: var(--primary-color);
-        }
-        .recharts-wrapper {
-        margin: 0 auto;
-        }
-        .recharts-legend-item {
-            cursor: pointer;
-        }
-        .recharts-tooltip {
-            background: white !important;
-            border: 1px solid #eee !important;
-            border-radius: 4px !important;
-            padding: 10px !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-        }
-        .table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+      :root {
+          --primary-color: #6633DD;
+          --secondary-color: #C8C1F4;
+          --page-bg: #f5f3ff; /* Новый цвет фона как на скриншоте */
+          --table-bg: #ffffff;
       }
-      
-      .chart-bars-container {
-          max-width: 600px;
+  
+      body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          min-height: 100vh;
+          background-color: var(--page-bg);
+          color: #333;
+          line-height: 1.6;
+          margin: 0;
+          padding: 0;
+      }
+  
+      /* Main container */
+      .main-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          align-items: flex-start;
+          max-width: 95%;
+          margin: 2rem auto;
+      }
+  
+      /* Table container */
+      .table-container {
+          flex: 2;
+          min-width: 0;
+          background-color: var(--table-bg);
+          border-radius: 15px;
+          padding: 1.5rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+  
+      /* Chart container */
+      .chart-container {
+          flex: 1;
+          min-width: 300px;
+          background-color: var(--table-bg);
+          border-radius: 15px;
+          padding: 1.5rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+  
+      /* Table styles */
+      .transactions-table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+      }
+  
+      .transactions-table th {
+          text-align: center;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #eee;
+          font-weight: 600;
+          color: #555;
+      }
+  
+      .transactions-table td {
+          text-align: center;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #eee;
+          vertical-align: middle;
+      }
+  
+      .transactions-table tr:last-child td {
+          border-bottom: none;
+      }
+  
+      /* Delete button */
+      .delete-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #ff3860;
+          font-size: 1.1rem;
+          padding: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           margin: 0 auto;
       }
-      
-      .chart-bar-wrapper {
-          background-color: #f5f5f5;
-          border-radius: 5px;
-          padding: 5px;
+  
+      /* Total balance */
+      .total-balance {
+          background-color: white !important;
+          color: #333 !important;
+          font-weight: bold;
+          margin-top: 1.5rem;
+          text-align: center;
+          padding: 1rem;
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
       }
-      
-      .chart-bar {
-          transition: width 0.5s ease;
+  
+      /* Empty chart message */
+      .empty-chart {
+          text-align: center;
+          color: #666;
+          padding: 2rem 0;
+          font-style: italic;
       }
-      
-      @media (max-width: 768px) {
-          .field.is-grouped {
-              flex-direction: column;
-          }
-          
-          .field.is-grouped .control {
-              margin-bottom: 0.75rem;
-              width: 100%;
-          }
-          
-          .hero-body {
-              padding: 1.5rem;
-          }
+  
+      /* Footer */
+      footer.footer {
+          text-align: center;
+          padding: 1.5rem;
+          margin-top: 2rem;
+          color: #666;
+          font-size: 0.9rem;
       }
-    </style>
+  </style>
 </head>
 
 <body>
-    <!-- Animated background element -->
-    <div class="animated-bg" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--gradient-bg);
-        opacity: 0.1;
-        z-index: -1;
-        pointer-events: none;
-    "></div>
+    <!-- Wave background -->
+    <div class="wave-bg">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+    </div>
     
     <!-- Main App Container -->
-    <section class="section" style="padding: 2rem 1.5rem;">
-        <div class="container" style="max-width: 900px;">
-            <div id="root" class="fade-in"></div>
+    <section class="section" style="padding: 1rem 0 4rem 0;">
+        <div class="container">
+            <div id="root"></div>
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="footer" style="padding: 2rem 1.5rem; background-color: rgba(255,255,255,0.8);">
-        <div class="content has-text-centered">
-            <p class="is-size-7">
-                <strong>F# Budget Tracker</strong> by <a href="https://github.com/yourusername" target="_blank">You</a>.
-                Built with <span class="icon-text">
-                    <span class="icon">
-                        <i class="fas fa-heart" style="color: #ff3860;"></i>
-                    </span>
-                </span>
-            </p>
-        </div>
-    </footer>
-    
     <script src="bundle.js"></script>
-    
-    <!-- Simple animation for background -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const bg = document.querySelector('.animated-bg');
-            let angle = 0;
-            
-            const animateBg = () => {
-                angle = (angle + 0.1) % 360;
-                const x = 50 + Math.sin(angle * Math.PI / 180) * 5;
-                const y = 50 + Math.cos(angle * Math.PI / 180) * 5;
-                bg.style.background = `linear-gradient(${angle}deg, #6633DD ${x}%, #C8C1F4 ${y}%)`;
-                requestAnimationFrame(animateBg);
-            };
-            
-            animateBg();
-        });
-    </script>
-    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+        <PaketPropsVersion>6.0.0</PaketPropsVersion>
+        <PaketPropsLoaded>true</PaketPropsLoaded>
+    </PropertyGroup>
+
+    <ItemGroup Condition="($(DesignTimeBuild) == true) AND (($(TargetFrameworkIdentifier) == 'MonoAndroid' And ($(TargetFrameworkVersion) == 'v10.0' Or $(TargetFrameworkVersion) == 'v11.0' Or $(TargetFrameworkVersion) == 'v12.0' Or $(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1' Or $(TargetFrameworkVersion) == 'v9.0')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.7.1' Or $(TargetFrameworkVersion) == 'v4.7.2' Or $(TargetFrameworkVersion) == 'v4.8' Or $(TargetFrameworkVersion) == 'v4.8.1')) Or ($(TargetFrameworkIdentifier) == '.NETCoreApp' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v2.1' Or $(TargetFrameworkVersion) == 'v2.2' Or $(TargetFrameworkVersion) == 'v3.0' Or $(TargetFrameworkVersion) == 'v3.1' Or $(TargetFrameworkVersion) == 'v5.0' Or $(TargetFrameworkVersion) == 'v6.0' Or $(TargetFrameworkVersion) == 'v7.0' Or $(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v9.0' Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.17763.0') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.18362.0') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.19041.0') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '8.0') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'Windows') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'android') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'ios') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'macos') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'tvos') Or ($(TargetFrameworkVersion) == 'v5.0' And '$(TargetPlatformIdentifier)' == 'watchos') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.17763.0') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.18362.0') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.19041.0') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '8.0') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'Windows') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'android') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'ios') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'macos') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'tvos') Or ($(TargetFrameworkVersion) == 'v6.0' And '$(TargetPlatformIdentifier)' == 'watchos') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.17763.0') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.18362.0') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.19041.0') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '8.0') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'Windows') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'android') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'ios') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'macos') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'tvos') Or ($(TargetFrameworkVersion) == 'v7.0' And '$(TargetPlatformIdentifier)' == 'watchos') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.17763.0') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.18362.0') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'Windows' And '$(TargetPlatformVersion)' == '10.0.19041.0') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'android') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'ios') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'macos') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'tvos') Or ($(TargetFrameworkVersion) == 'v8.0' And '$(TargetPlatformIdentifier)' == 'watchos'))) Or ($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v2.1')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac'))">
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.Core">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">4.5</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="FSharp.Core">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">9.0.202</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.Browser.Blob">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">1.4</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.Browser.Gamepad">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">1.3</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.Browser.Event">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">1.7</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.Browser.WebStorage">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">1.3</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.Browser.Dom">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">2.18.1</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.React.Types">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">18.4</Version>
+        </PackageReference>
+        <PackageReference Condition=" '$(ManagePackageVersionsCentrally)' != 'true' " Include="Fable.ReactDom.Types">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">18.2</Version>
+        </PackageReference>
+        <PackageReference  Include="Fable.React">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">9.4</Version>
+        </PackageReference>
+        <PackageVersion Include="Fable.Core">
+            <Version>4.5</Version>
+        </PackageVersion>
+        <PackageVersion Include="FSharp.Core">
+            <Version>9.0.202</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.Browser.Blob">
+            <Version>1.4</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.Browser.Gamepad">
+            <Version>1.3</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.Browser.Event">
+            <Version>1.7</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.Browser.WebStorage">
+            <Version>1.3</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.Browser.Dom">
+            <Version>2.18.1</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.React.Types">
+            <Version>18.4</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.ReactDom.Types">
+            <Version>18.2</Version>
+        </PackageVersion>
+        <PackageVersion Include="Fable.React">
+            <Version>9.4</Version>
+        </PackageVersion>
+    </ItemGroup>
+    <ItemGroup Condition="($(DesignTimeBuild) == true)">
+        <PackageReference  Include="Fable.Recharts">
+            <Version Condition=" '$(ManagePackageVersionsCentrally)' != 'true' ">1.1.2</Version>
+        </PackageReference>
+        <PackageVersion Include="Fable.Recharts">
+            <Version>1.1.2</Version>
+        </PackageVersion>
+    </ItemGroup>
+</Project>

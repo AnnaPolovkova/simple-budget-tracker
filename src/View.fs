@@ -8,27 +8,36 @@ open System
 
 let transactionRow (dispatch: Msg -> unit) (t: Transaction) =
     Html.tr [
-        prop.className "is-size-6"
         prop.children [
             Html.td [ prop.text t.Description ]
             Html.td [ 
                 prop.className (if t.Amount >= 0M then "has-text-success" else "has-text-danger")
-                prop.text (sprintf "%.2f $" t.Amount) 
+                prop.text (sprintf "%.2f €" t.Amount) 
             ]
             Html.td [ 
-                prop.className "tag is-rounded"
-                prop.style [ 
-                    style.backgroundColor "#C8C1F4"
-                    style.color "#2E2E2E"
+                prop.children [
+                    Html.span [
+                        prop.className "tag is-rounded"
+                        prop.style [ 
+                            style.backgroundColor "#C8C1F4"
+                            style.color "#2E2E2E"
+                            style.marginLeft 0
+                            style.display.inlineBlock
+                            style.verticalAlign.middle
+                        ]
+                        prop.text (if String.IsNullOrEmpty(t.Category) then "Uncategorized" else t.Category)
+                    ]
                 ]
-                prop.text (if String.IsNullOrEmpty(t.Category) then "Uncategorized" else t.Category)
             ]
             Html.td [ prop.text (t.Date.ToString("MM/dd/yyyy")) ]
             Html.td [
-                Html.button [
-                    prop.className "button is-small is-danger is-light"
-                    prop.text "❌"
-                    prop.onClick (fun _ -> dispatch (RemoveTransaction t.Id))
+                prop.style [ style.textAlign.center ]
+                prop.children [
+                    Html.button [
+                        prop.className "button is-small is-danger is-light"
+                        prop.text "❌"
+                        prop.onClick (fun _ -> dispatch (RemoveTransaction t.Id))
+                    ]
                 ]
             ]
         ]
@@ -79,7 +88,7 @@ let categoryPieChart (transactions: Transaction list) =
                                 ]
                                 prop.children [
                                     Html.span item.name
-                                    Html.span (sprintf "$%.2f (%.1f%%)" item.value percentage)
+                                    Html.span (sprintf "%.2f € (%.1f%%)" item.value percentage)
                                 ]
                             ]
                             Html.div [
@@ -97,189 +106,211 @@ let categoryPieChart (transactions: Transaction list) =
         ]
 
 let view (model: Model) (dispatch: Msg -> unit) =
-    Bulma.hero [
+    Html.div [
         prop.style [
-            style.backgroundImage "linear-gradient(135deg, #6633DD 0%, #C8C1F4 100%)"
+            style.display.flex
+            style.flexDirection.column
             style.minHeight (length.vh 100)
-            style.paddingTop 20
+            style.backgroundColor "#f5f3ff"
+            style.padding 20
         ]
         prop.children [
-            Bulma.heroBody [
-                Bulma.container [
-                    Bulma.box [
-                        prop.style [
-                            style.boxShadow.none
-                            style.borderRadius 15
-                            style.backgroundColor "white"
-                            style.padding 20
+            // Основной контент
+            Bulma.box [
+                prop.style [
+                    style.boxShadow.none
+                    style.borderRadius 15
+                    style.backgroundColor.white
+                    style.padding 20
+                    style.flexGrow 1
+                ]
+                prop.children [
+                    // Заголовок и форма ввода
+                    Html.h1 [
+                        prop.className "title has-text-centered"
+                        prop.style [ 
+                            style.color "#6633DD"
+                            style.marginBottom 20
                         ]
+                        prop.text "💰 Budget Tracker"
+                    ]
+                    
+                    // Форма добавления транзакций
+                    Bulma.field.div [
+                        field.isGrouped
+                        prop.style [ style.marginBottom 20 ]
                         prop.children [
-                            Html.h1 [
-                                prop.className "title has-text-centered"
-                                prop.style [ 
-                                    style.color "#6633DD"
-                                    style.marginBottom 20
-                                ]
-                                prop.text "💰 Budget Tracker"
-                            ]
-                            
-                            // Input Form
-                            Bulma.field.div [
-                                field.isGrouped
-                                prop.style [ style.marginBottom 20 ]
+                            Bulma.control.div [
+                                control.isExpanded
                                 prop.children [
-                                    Bulma.control.div [
-                                        control.isExpanded
-                                        prop.children [
-                                            Bulma.input.text [
-                                                prop.placeholder "Description"
-                                                prop.value model.InputDescription
-                                                prop.onChange (fun (value: string) -> dispatch (UpdateDescription value))
-                                                prop.style [ 
-                                                    style.borderRadius 10
-                                                    style.borderColor "#ddd"
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                    Bulma.control.div [
-                                        control.hasIconsLeft
-                                        prop.children [
-                                            Bulma.input.number [
-                                                prop.placeholder "0.00"
-                                                prop.value model.InputAmount
-                                                prop.onChange (fun (value: string) -> dispatch (UpdateAmount value))
-                                                prop.style [ 
-                                                    style.borderRadius 10
-                                                    style.borderColor "#ddd"
-                                                ]
-                                            ]
-                                            Bulma.icon [
-                                                icon.isLeft
-                                                prop.children [
-                                                    Html.i [ prop.className "fas fa-dollar-sign" ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                    Bulma.control.div [
-                                        control.hasIconsLeft
-                                        prop.children [
-                                            Bulma.input.text [
-                                                prop.placeholder "Category"
-                                                prop.value model.InputCategory
-                                                prop.onChange (fun (value: string) -> dispatch (UpdateCategory value))
-                                                prop.style [ 
-                                                    style.borderRadius 10
-                                                    style.borderColor "#ddd"
-                                                ]
-                                            ]
-                                            Bulma.icon [
-                                                icon.isLeft
-                                                prop.children [
-                                                    Html.i [ prop.className "fas fa-tag" ]
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                    Bulma.control.div [
-                                        Bulma.button.button [
-                                            prop.className "is-primary"
-                                            prop.style [
-                                                style.backgroundColor "#6633DD"
-                                                style.borderRadius 10
-                                                style.color "white"
-                                                style.borderWidth 0
-                                            ]
-                                            prop.text "Add"
-                                            prop.onClick (fun _ -> dispatch AddTransaction)
-                                        ]
-                                    ]
-                                ]
-                            ]
-                            
-                            // Transactions Table
-                            Html.div [
-                                prop.className "table-container"
-                                prop.style [ style.marginBottom 30 ]
-                                prop.children [
-                                    Bulma.table [
-                                        table.isFullWidth
-                                        table.isStriped
-                                        table.isHoverable
-                                        prop.style [
-                                            style.borderRadius 10
-                                            style.boxShadow.none
-                                            style.border (1, borderStyle.solid, "#eee")
-                                        ]
-                                        prop.children [
-                                            Html.thead [
-                                                Html.tr [
-                                                    Html.th "Description"
-                                                    Html.th "Amount"
-                                                    Html.th "Category"
-                                                    Html.th "Date"
-                                                    Html.th "Action"
-                                                ]
-                                            ]
-                                            Html.tbody [
-                                                for t in model.Transactions 
-                                                    |> List.sortByDescending (fun t -> t.Date) -> 
-                                                        transactionRow dispatch t
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                            
-                            // Expenses Chart
-                            Html.div [
-                                prop.style [
-                                    style.marginBottom 30
-                                    style.padding 20
-                                    style.backgroundColor "#f9f9f9"
-                                    style.borderRadius 10
-                                ]
-                                prop.children [
-                                    Html.h3 [
-                                        prop.className "title is-5 has-text-centered"
+                                    Bulma.input.text [
+                                        prop.placeholder "Description"
+                                        prop.value model.InputDescription
+                                        prop.onChange (fun (value: string) -> dispatch (UpdateDescription value))
                                         prop.style [ 
-                                            style.marginBottom 15
-                                            style.color "#6633DD"
+                                            style.borderRadius 10
+                                            style.borderColor "#ddd"
                                         ]
-                                        prop.text "Expenses by Category"
                                     ]
-                                    categoryPieChart model.Transactions
+                                ]
+                            ]
+                            Bulma.control.div [
+                                control.hasIconsLeft
+                                prop.children [
+                                    Bulma.input.number [
+                                        prop.placeholder "0.00"
+                                        prop.value model.InputAmount
+                                        prop.onChange (fun (value: string) -> dispatch (UpdateAmount value))
+                                        prop.style [ 
+                                            style.borderRadius 10
+                                            style.borderColor "#ddd"
+                                        ]
+                                    ]
+                                    Bulma.icon [
+                                        icon.isLeft
+                                        prop.children [
+                                            Html.i [ prop.className "fas fa-euro-sign" ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                            Bulma.control.div [
+                                control.hasIconsLeft
+                                prop.children [
+                                    Bulma.input.text [
+                                        prop.placeholder "Category"
+                                        prop.value model.InputCategory
+                                        prop.onChange (fun (value: string) -> dispatch (UpdateCategory value))
+                                        prop.style [ 
+                                            style.borderRadius 10
+                                            style.borderColor "#ddd"
+                                        ]
+                                    ]
+                                    Bulma.icon [
+                                        icon.isLeft
+                                        prop.children [
+                                            Html.i [ prop.className "fas fa-tag" ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                            Bulma.control.div [
+                                Bulma.button.button [
+                                    prop.className "is-primary"
+                                    prop.style [
+                                        style.backgroundColor "#6633DD"
+                                        style.borderRadius 10
+                                        style.color "white"
+                                        style.borderWidth 0
+                                    ]
+                                    prop.text "Add"
+                                    prop.onClick (fun _ -> dispatch AddTransaction)
+                                ]
+                            ]
+                        ]
+                    ]
+                    
+                    // Таблица и график в одной строке
+                    Bulma.columns [
+                        columns.isDesktop
+                        prop.style [ style.marginTop 20 ]
+                        prop.children [
+                            // Таблица транзакций
+                            Bulma.column [
+                                column.isTwoThirds
+                                prop.children [
+                                    Html.div [
+                                        prop.className "table-container"
+                                        prop.children [
+                                            Bulma.table [
+                                                table.isFullWidth
+                                                table.isStriped
+                                                table.isHoverable
+                                                prop.style [
+                                                    style.borderRadius 10
+                                                    style.boxShadow.none
+                                                    style.border (1, borderStyle.solid, "#eee")
+                                                ]
+                                                prop.children [
+                                                    Html.thead [
+                                                        Html.tr [
+                                                            Html.th "Description"
+                                                            Html.th "Amount"
+                                                            Html.th "Category"
+                                                            Html.th "Date"
+                                                            Html.th "Delete"
+                                                        ]
+                                                    ]
+                                                    Html.tbody [
+                                                        for t in model.Transactions 
+                                                            |> List.sortByDescending (fun t -> t.Date) -> 
+                                                                transactionRow dispatch t
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
                                 ]
                             ]
                             
-                            // Total Balance
-                            Html.div [
-                                prop.className "has-text-centered"
-                                prop.style [ style.marginTop 20 ]
+                            // График расходов
+                            Bulma.column [
                                 prop.children [
-                                    Bulma.tag [
-                                        tag.isMedium
+                                    Html.div [
                                         prop.style [
-                                            style.backgroundColor "#C8C1F4"
-                                            style.color "#2E2E2E"
-                                            style.padding (15, 25)
-                                            style.fontSize 16
+                                            style.padding 20
+                                            style.backgroundColor "#f9f9f9"
+                                            style.borderRadius 10
+                                            style.height (length.percent 100)
                                         ]
                                         prop.children [
-                                            let total = model.Transactions |> List.sumBy (fun t -> t.Amount)
-                                            let color = if total >= 0M then "has-text-success" else "has-text-danger"
-                                            Html.span [
-                                                prop.className color
-                                                prop.text (sprintf "Total Balance: $%.2f" total)
+                                            Html.h3 [
+                                                prop.className "title is-5 has-text-centered"
+                                                prop.style [ 
+                                                    style.marginBottom 15
+                                                    style.color "#6633DD"
+                                                ]
+                                                prop.text "Expenses by Category"
                                             ]
+                                            categoryPieChart model.Transactions
                                         ]
                                     ]
                                 ]
                             ]
                         ]
                     ]
+                    
+                    // Total Balance
+                    Html.div [
+                        prop.className "has-text-centered"
+                        prop.style [ 
+                            style.marginTop 20
+                            style.backgroundColor.white
+                            style.padding 15
+                            style.borderRadius 10
+                        ]
+                        prop.children [
+                            let total = model.Transactions |> List.sumBy (fun t -> t.Amount)
+                            let color = if total >= 0M then "has-text-success" else "has-text-danger"
+                            Html.span [
+                                prop.className color
+                                prop.text (sprintf "Total Balance: %.2f €" total)
+                            ]
+                        ]
+                    ]
                 ]
+            ]
+            
+            // Футер (внизу по центру)
+            Html.footer [
+                prop.style [
+                    style.textAlign.center
+                    style.padding 15
+                    style.color "#6633DD"
+                    style.fontSize 14
+                    style.marginTop 20
+                ]
+                prop.text "Created by Polovkova Anna"
             ]
         ]
     ]
