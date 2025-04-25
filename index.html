@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💰 F# Budget Tracker</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Global Styles -->
+    <style>
+      :root {
+          --primary-color: #6633DD;
+          --secondary-color: #C8C1F4;
+          --page-bg: #f5f3ff; /* Новый цвет фона как на скриншоте */
+          --table-bg: #ffffff;
+      }
+  
+      body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          min-height: 100vh;
+          background-color: var(--page-bg);
+          color: #333;
+          line-height: 1.6;
+          margin: 0;
+          padding: 0;
+      }
+  
+      /* Main container */
+      .main-container {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          align-items: flex-start;
+          max-width: 95%;
+          margin: 2rem auto;
+      }
+  
+      /* Table container */
+      .table-container {
+          flex: 2;
+          min-width: 0;
+          background-color: var(--table-bg);
+          border-radius: 15px;
+          padding: 1.5rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+  
+      /* Chart container */
+      .chart-container {
+          flex: 1;
+          min-width: 300px;
+          background-color: var(--table-bg);
+          border-radius: 15px;
+          padding: 1.5rem;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+  
+      /* Table styles */
+      .transactions-table {
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0;
+      }
+  
+      .transactions-table th {
+          text-align: center;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #eee;
+          font-weight: 600;
+          color: #555;
+      }
+  
+      .transactions-table td {
+          text-align: center;
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid #eee;
+          vertical-align: middle;
+      }
+  
+      .transactions-table tr:last-child td {
+          border-bottom: none;
+      }
+  
+      /* Delete button */
+      .delete-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #ff3860;
+          font-size: 1.1rem;
+          padding: 0.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto;
+      }
+  
+      /* Total balance */
+      .total-balance {
+          background-color: white !important;
+          color: #333 !important;
+          font-weight: bold;
+          margin-top: 1.5rem;
+          text-align: center;
+          padding: 1rem;
+          border-radius: 10px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+  
+      /* Empty chart message */
+      .empty-chart {
+          text-align: center;
+          color: #666;
+          padding: 2rem 0;
+          font-style: italic;
+      }
+  
+      /* Footer */
+      footer.footer {
+          text-align: center;
+          padding: 1.5rem;
+          margin-top: 2rem;
+          color: #666;
+          font-size: 0.9rem;
+      }
+  </style>
+</head>
+
+<body>
+    <!-- Wave background -->
+    <div class="wave-bg">
+        <div class="wave wave-1"></div>
+        <div class="wave wave-2"></div>
+        <div class="wave wave-3"></div>
+    </div>
+    
+    <!-- Main App Container -->
+    <section class="section" style="padding: 1rem 0 4rem 0;">
+        <div class="container">
+            <div id="root"></div>
+        </div>
+    </section>
+    
+    <script src="bundle.js"></script>
+</body>
+</html>
