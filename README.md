@@ -67,6 +67,14 @@ Color-coded for easy overview
 - **Elmish** – Elm architecture in F#
 - **Feliz** – React bindings for F#
 - **Bulma** – CSS framework for modern UI
+- 
+---
+
+## 📚 About
+Developed as a mid-term project (Project Alpha)
+for the F# Programming course at the University of Dunaújváros, Hungary.
+
+Instructor: Adam Granicz, IntelliFactory
 
 ---
 
@@ -77,3 +85,4 @@ git clone https://github.com/your-username/simple-budget-tracker.git
 cd simple-budget-tracker
 npm install
 npm start
+
