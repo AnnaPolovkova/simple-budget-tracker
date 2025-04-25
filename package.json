@@ -2,13 +2,11 @@
   "name": "marketcap-fsharp",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://dmitriidrugov.github.io/MarketCapFSHARP",
+  "homepage": "https://github.com/AnnaPolovkova/simple-budget-tracker",
   "scripts": {
-  "postinstall": "dotnet tool restore",
-  "start": "dotnet fable watch src --run webpack-dev-server",
-  "build": "dotnet fable src && webpack",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d public"
+  "start": "webpack-dev-server",
+  "build": "webpack --mode production",
+  "deploy": "npm run build && gh-pages -d public"
 },
   "devDependencies": {
     "gh-pages": "^6.3.0",

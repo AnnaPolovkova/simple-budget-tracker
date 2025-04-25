@@ -1,4 +1,4 @@
-module Update
+module StateManagement
 
 open Elmish
 open Api

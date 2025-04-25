@@ -1,4 +1,4 @@
-module Api
+module DataStorage
 
 open Fable.Core.JsInterop
 open Thoth.Json

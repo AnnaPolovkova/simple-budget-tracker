@@ -1,4 +1,4 @@
-module Model
+module DomainTypes
 
 open System
 
