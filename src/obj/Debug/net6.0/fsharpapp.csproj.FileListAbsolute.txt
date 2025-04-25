@@ -1,0 +1,2 @@
+C:\Users\79043\SimpleBudgetTracker\src\bin\Debug\net6.0\fsharpapp.deps.json
+C:\Users\79043\SimpleBudgetTracker\src\obj\Debug\net6.0\fsharpapp.GeneratedMSBuildEditorConfig.editorconfig

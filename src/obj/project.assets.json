@@ -822,9 +822,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\fsharp-crypto-app.csproj",
-      "projectName": "fsharp-crypto-app",
-      "projectPath": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\fsharp-crypto-app.csproj",
+      "projectUniqueName": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\fsharpapp.csproj",
+      "projectName": "fsharpapp",
+      "projectPath": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\fsharpapp.csproj",
       "packagesPath": "C:\\Users\\79043\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\79043\\SimpleBudgetTracker\\src\\obj\\",
       "projectStyle": "PackageReference",

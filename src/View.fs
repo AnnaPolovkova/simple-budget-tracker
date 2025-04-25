@@ -50,14 +50,14 @@ let categoryPieChart (transactions: Transaction list) =
         |> List.groupBy (fun t -> t.Category)
         |> List.map (fun (category, trans) ->
             {| 
-                name = if String.IsNullOrWhiteSpace(category) then "Uncategorized" else category
-                value = trans |> List.sumBy (fun t -> abs t.Amount)
-                fill = 
+                Category = if String.IsNullOrWhiteSpace(category) then "Uncategorized" else category
+                Amount = trans |> List.sumBy (fun t -> abs t.Amount)
+                Color = 
                     let hash = (if String.IsNullOrEmpty(category) then "Uncategorized" else category).GetHashCode() |> abs
                     let colors = [| "#FF6384"; "#36A2EB"; "#FFCE56"; "#4BC0C0"; "#9966FF"; "#FF9F40"; "#8AC24A"; "#607D8B"; "#E91E63"; "#9C27B0" |]
                     colors.[hash % colors.Length]
             |})
-        |> List.sortByDescending (fun x -> x.value)
+        |> List.sortByDescending (fun x -> x.Amount)
 
     if expenseData.IsEmpty then
         Html.div [
@@ -69,35 +69,51 @@ let categoryPieChart (transactions: Transaction list) =
             prop.text "Add expenses to see the chart"
         ]
     else
+        let totalExpenses = expenseData |> List.sumBy (fun x -> x.Amount)
+        
         Html.div [
-            prop.className "chart-bars-container"
-            prop.style [ style.marginTop 20 ]
+            prop.style [
+                style.width (length.percent 100)
+                style.maxWidth 500
+                style.marginLeft length.auto
+                style.marginRight length.auto
+            ]
             prop.children [
                 for item in expenseData do
-                    let percentage = float item.value * 100.0 / float (expenseData |> List.sumBy (fun x -> x.value))
+                    let percentage = float item.Amount * 100.0 / float totalExpenses
                     Html.div [
-                        prop.className "chart-bar-wrapper"
-                        prop.style [ style.marginBottom 10 ]
+                        prop.style [ style.marginBottom 15 ]
                         prop.children [
                             Html.div [
-                                prop.className "chart-bar-label"
-                                prop.style [ 
+                                prop.style [
                                     style.display.flex
                                     style.justifyContent.spaceBetween
                                     style.marginBottom 5
                                 ]
                                 prop.children [
-                                    Html.span item.name
-                                    Html.span (sprintf "%.2f € (%.1f%%)" item.value percentage)
+                                    Html.span [
+                                        prop.style [ style.fontWeight.bold ]
+                                        prop.text item.Category
+                                    ]
+                                    Html.span (sprintf "%.2f € (%.1f%%)" item.Amount percentage)
                                 ]
                             ]
                             Html.div [
-                                prop.className "chart-bar"
                                 prop.style [
-                                    style.backgroundColor item.fill
+                                    style.width (length.percent 100)
                                     style.height 15
+                                    style.backgroundColor "#f0f0f0"
                                     style.borderRadius 5
-                                    style.width (length.percent percentage)
+                                    style.overflow.hidden
+                                ]
+                                prop.children [
+                                    Html.div [
+                                        prop.style [
+                                            style.width (length.percent percentage)
+                                            style.height (length.percent 100)
+                                            style.backgroundColor item.Color
+                                        ]
+                                    ]
                                 ]
                             ]
                         ]

@@ -43,20 +43,19 @@ export function transactionRow(dispatch, t) {
 }
 
 export function categoryPieChart(transactions) {
-    let elems_2;
-    const expenseData = sortByDescending((x_2) => x_2.value, map((tupledArg) => {
-        let hash, value_1, colors;
+    let elems_3;
+    const expenseData = sortByDescending((x_2) => x_2.Amount, map((tupledArg) => {
+        let hash, value, colors;
         const category = tupledArg[0];
         const trans = tupledArg[1];
-        const name = isNullOrWhiteSpace(category) ? "Uncategorized" : category;
-        const value = sumBy((t_2) => abs(t_2.Amount), trans, {
-            GetZero: () => (new Decimal(0)),
-            Add: op_Addition,
-        });
+        const Category = isNullOrWhiteSpace(category) ? "Uncategorized" : category;
         return {
-            fill: (hash = (((value_1 = (stringHash(isNullOrEmpty(category) ? "Uncategorized" : category) | 0), Math.abs(value_1))) | 0), (colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#8AC24A", "#607D8B", "#E91E63", "#9C27B0"], colors[hash % colors.length])),
-            name: name,
-            value: value,
+            Amount: sumBy((t_2) => abs(t_2.Amount), trans, {
+                GetZero: () => (new Decimal(0)),
+                Add: op_Addition,
+            }),
+            Category: Category,
+            Color: (hash = (((value = (stringHash(isNullOrEmpty(category) ? "Uncategorized" : category) | 0), Math.abs(value))) | 0), (colors = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF", "#FF9F40", "#8AC24A", "#607D8B", "#E91E63", "#9C27B0"], colors[hash % colors.length])),
         };
     }, List_groupBy((t_1) => t_1.Category, filter((t) => equals(t.Type, new TransactionType(1, [])), transactions), {
         Equals: (x, y) => (x === y),
@@ -75,34 +74,45 @@ export function categoryPieChart(transactions) {
         });
     }
     else {
-        return createElement("div", createObj(ofArray([["className", "chart-bars-container"], ["style", {
-            marginTop: 20,
-        }], (elems_2 = toList(delay(() => collect((item) => {
-            let elems_1, elems, clo, clo_1;
-            const percentage = (toNumber(item.value) * 100) / toNumber(sumBy((x_4) => x_4.value, expenseData, {
-                GetZero: () => (new Decimal(0)),
-                Add: op_Addition,
-            }));
-            return singleton_1(createElement("div", createObj(ofArray([["className", "chart-bar-wrapper"], ["style", {
-                marginBottom: 10,
-            }], (elems_1 = [createElement("div", createObj(ofArray([["className", "chart-bar-label"], ["style", {
+        const totalExpenses = sumBy((x_4) => x_4.Amount, expenseData, {
+            GetZero: () => (new Decimal(0)),
+            Add: op_Addition,
+        });
+        return createElement("div", createObj(ofArray([["style", {
+            width: 100 + "%",
+            maxWidth: 500,
+            marginLeft: "auto",
+            marginRight: "auto",
+        }], (elems_3 = toList(delay(() => collect((item) => {
+            let elems_2, elems, clo, clo_1, elems_1;
+            const percentage = (toNumber(item.Amount) * 100) / toNumber(totalExpenses);
+            return singleton_1(createElement("div", createObj(ofArray([["style", {
+                marginBottom: 15,
+            }], (elems_2 = [createElement("div", createObj(ofArray([["style", {
                 display: "flex",
                 justifyContent: "space-between",
                 marginBottom: 5,
             }], (elems = [createElement("span", {
-                children: [item.name],
-            }), createElement("span", {
-                children: [(clo = toText(printf("%.2f € (%.1f%%)")), (clo_1 = clo(item.value), clo_1(percentage)))],
-            })], ["children", Interop_reactApi.Children.toArray(Array.from(elems))])]))), createElement("div", {
-                className: "chart-bar",
                 style: {
-                    backgroundColor: item.fill,
-                    height: 15,
-                    borderRadius: 5,
-                    width: percentage + "%",
+                    fontWeight: "bold",
                 },
-            })], ["children", Interop_reactApi.Children.toArray(Array.from(elems_1))])]))));
-        }, expenseData))), ["children", Interop_reactApi.Children.toArray(Array.from(elems_2))])])));
+                children: item.Category,
+            }), createElement("span", {
+                children: [(clo = toText(printf("%.2f € (%.1f%%)")), (clo_1 = clo(item.Amount), clo_1(percentage)))],
+            })], ["children", Interop_reactApi.Children.toArray(Array.from(elems))])]))), createElement("div", createObj(ofArray([["style", {
+                width: 100 + "%",
+                height: 15,
+                backgroundColor: "#f0f0f0",
+                borderRadius: 5,
+                overflow: "hidden",
+            }], (elems_1 = [createElement("div", {
+                style: {
+                    width: percentage + "%",
+                    height: 100 + "%",
+                    backgroundColor: item.Color,
+                },
+            })], ["children", Interop_reactApi.Children.toArray(Array.from(elems_1))])])))], ["children", Interop_reactApi.Children.toArray(Array.from(elems_2))])]))));
+        }, expenseData))), ["children", Interop_reactApi.Children.toArray(Array.from(elems_3))])])));
     }
 }
 

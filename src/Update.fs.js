@@ -5,9 +5,9 @@ import { fromString, Auto_generateBoxedDecoder_Z6670B51 } from "./fable_modules/
 import { Transaction, TransactionType, Model, Transaction$reflection } from "./Model.fs.js";
 import { saveTransactions, extraCoders } from "./Api.fs.js";
 import { toConsole } from "./fable_modules/fable-library.4.0.0/String.js";
-import { filter, cons, singleton, empty } from "./fable_modules/fable-library.4.0.0/List.js";
+import { filter, cons, empty } from "./fable_modules/fable-library.4.0.0/List.js";
 import { Cmd_none } from "./fable_modules/Fable.Elmish.4.0.0/cmd.fs.js";
-import { tryParse } from "./fable_modules/fable-library.4.0.0/Decimal.js";
+import { fromParts, compare, tryParse } from "./fable_modules/fable-library.4.0.0/Decimal.js";
 import Decimal from "./fable_modules/fable-library.4.0.0/Decimal.js";
 import { newGuid } from "./fable_modules/fable-library.4.0.0/Guid.js";
 import { now } from "./fable_modules/fable-library.4.0.0/Date.js";
@@ -56,9 +56,7 @@ export function init() {
         const t_1 = matchValue_2;
         transactions = t_1;
     }
-    return [new Model(transactions, "", "", ""), singleton((dispatch) => {
-        dispatch(new Msg(5, []));
-    })];
+    return [new Model(transactions, "", "", ""), Cmd_none()];
 }
 
 export function update(msg, model) {
@@ -79,7 +77,8 @@ export function update(msg, model) {
             })), outArg];
             if (matchValue[0]) {
                 const amount_1 = matchValue[1];
-                const newTransaction = new Transaction(newGuid(), new TransactionType(0, []), model.InputDescription, model.InputCategory, amount_1, now());
+                const transactionType = (compare(amount_1, fromParts(0, 0, 0, false, 0)) < 0) ? (new TransactionType(1, [])) : (new TransactionType(0, []));
+                const newTransaction = new Transaction(newGuid(), transactionType, model.InputDescription, model.InputCategory, amount_1, now());
                 const updated = cons(newTransaction, model.Transactions);
                 saveTransactions(updated);
                 return [new Model(updated, "", "", ""), Cmd_none()];

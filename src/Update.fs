@@ -23,9 +23,9 @@ let init () =
         InputDescription = ""
         InputAmount = ""
         InputCategory = ""
-    }, Cmd.ofMsg LoadFromStorage
+    }, Cmd.none
 
-let update msg (model: Model) =
+let update msg model =
     match msg with
     | UpdateDescription desc ->
         { model with InputDescription = desc }, Cmd.none
@@ -36,9 +36,10 @@ let update msg (model: Model) =
     | AddTransaction ->
         match System.Decimal.TryParse model.InputAmount with
         | true, amount ->
+            let transactionType = if amount < 0M then Expense else Income
             let newTransaction = {
                 Id = Guid.NewGuid()
-                Type = Income // Можно добавить выбор типа
+                Type = transactionType
                 Description = model.InputDescription
                 Amount = amount
                 Category = model.InputCategory
