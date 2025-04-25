@@ -1,10 +1,12 @@
 # Simple Budget Tracker 💰
 
-A minimalistic web app for tracking personal income and expenses. 
+A minimalistic web app for tracking personal income and expenses.
 
 Add transactions, visualize spending by category, and stay on top of your budget — all in your browser.
 
 Built with the power of **F#**, **Fable**, and **Elmish**.
+
+[**Try it live**](https://annapolovkova.github.io/simple-budget-tracker/)
 
 ---
 
